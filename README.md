@@ -1,4 +1,4 @@
-# 3270bbs Docker container
+# 3270BBS Docker container
 
 The Docker Container in this repo contain the [3270 BBS](https://github.com/moshix/3270BBS), which is created and built by [moshix](https://github.com/moshix), a briliant gentleman in the mainframe community. 
 All credit for the [3270 BBS](https://github.com/moshix/3270BBS) goes to [moshix](https://github.com/moshix).
@@ -6,7 +6,7 @@ All credit for the [3270 BBS](https://github.com/moshix/3270BBS) goes to [moshix
 You can easily install 3270 BBS without this docker container, by following the instructions on [3270 BBS](https://github.com/moshix/3270BBS).
 
 So why this docker container ?
-The benefits is what you get with any app that is containerized, such as easy deployment
+The benefits is what you get with any app that is containerized, such as easy deployment.
 
 # Start the 3270BBS docker container
 
@@ -41,4 +41,5 @@ This will output the sql statements to std. output. Pipe it to a file to save it
 
 ```sh
 docker exec -it 3270BBS sqlite3 tsu.db .dump
+
 ```
