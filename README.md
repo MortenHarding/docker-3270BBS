@@ -11,6 +11,7 @@ The benefits is what you get with any app that is containerized, such as easy de
 # Start the 3270BBS docker container
 
 Start the 3270BBS using the container available at [hub.docker.com/mhardingdk/3270bbs](https://hub.docker.com/repository/docker/mhardingdk/3270bbs/general)
+
 Note that the database file tsu.db, and the tsu.cnf file, will be created in a subfolder ./data and will not be deleted if you stop and delete the container. 
 This will ensure that any changes made to the tsu.cnf file or the tsu.db, will be used at next startup.
 
@@ -44,4 +45,5 @@ This will output the sql statements to std. output. Pipe it to a file to save it
 docker exec -it 3270BBS sqlite3 tsu.db .dump
 
 ```
+
 
