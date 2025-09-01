@@ -1,6 +1,6 @@
 # Using Alpine as a base
 FROM alpine:latest AS base
-RUN apk add sqlite git sudo
+RUN apk add sqlite git sudo tzdata
 
 ENV OSTYPE=linux
 

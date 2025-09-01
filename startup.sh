@@ -22,4 +22,10 @@ if [ ! -f "tsu.cnf" ]; then
     ln -s ./data/tsu.cnf tsu.cnf
 fi
 
+#Move tsu.greet to ./data
+if [ ! -f "./data/tsu.greet" ]; then
+    echo "*** ./data/tsu.greet does not exist ***"
+    mv tsu.greet ./data
+    ln -s ./data/tsu.greet tsu.greet
+fi
 ./start_bbs.bash
