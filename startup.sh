@@ -16,7 +16,7 @@ if [ ! -f "tsu.db" ]; then
 fi
 
 #Create tsu.cnf if it doesn't exist
-if [ ! -f "tsu.cnf" ]; then
+if [ ! -f "./data/tsu.cnf" ]; then
     echo "*** tsu.cnf does not exist ***"
     cp tsu.config ./data/tsu.cnf
     ln -s ./data/tsu.cnf tsu.cnf
