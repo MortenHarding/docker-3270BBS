@@ -1,6 +1,20 @@
 # Using Alpine as a base
+FROM alpine:latest AS build
+RUN apk --update add gcc make g++ zlib-dev python3 ncurses-dev sqlite git sudo tzdata
+
+WORKDIR /home
+RUN wget https://x3270.bgp.nu/download/04.04/suite3270-4.4ga6-src.tgz \
+&& gunzip suite3270-4.4ga6-src.tgz \
+&& tar -xvf suite3270-4.4ga6-src.tar
+
+WORKDIR /home/suite3270-4.4
+RUN ./configure --enable-c3270 \
+&& make install
+
 FROM alpine:latest AS base
-RUN apk add sqlite git sudo tzdata
+RUN apk add ncurses-dev sqlite git sudo tzdata
+
+COPY --from=build /usr/local/bin/c3270 /usr/local/bin
 
 ENV OSTYPE=linux
 

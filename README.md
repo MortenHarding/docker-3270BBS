@@ -17,6 +17,12 @@ This will ensure that any changes made to the tsu.cnf file or the tsu.db, will b
 docker run -dit --rm --name 3270BBS -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 mhardingdk/3270bbs:latest
 ```
 
+# Connect to 3270 BBS using the included c3270 emulator
+
+```sh
+docker exec -it 3270BBS c3270 localhost:3270
+```
+
 # Build the container using the dockerfile in this repo
 
 ```sh
