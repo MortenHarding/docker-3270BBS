@@ -17,8 +17,13 @@ fi
 
 #Create tsu.cnf if it doesn't exist
 if [ ! -f "./data/tsu.cnf" ]; then
-    echo "*** tsu.cnf does not exist ***"
+    echo "*** ./data/tsu.cnf does not exist ***"
     cp tsu.config ./data/tsu.cnf
+fi
+
+#Create tsu.cnf link if it doesn't exist
+if [ ! -f "tsu.cnf" ]; then
+    echo "*** tsu.cnf link does not exist ***"
     ln -s ./data/tsu.cnf tsu.cnf
 fi
 
