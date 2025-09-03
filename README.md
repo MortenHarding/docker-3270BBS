@@ -43,9 +43,16 @@ docker exec -it 3270BBS sqlite3 tsu.db
 
 # Dump the sqlite tsu.db
 
-This will output the sql statements to std. output. Pipe it to a file to save it as a backup.
+This will output the sql statements to a file to save it as a backup.
 
+Full backup:
 ```sh
-docker exec -it 3270BBS sqlite3 tsu.db '.dump --data-only' > backup.sql
+docker exec -it 3270BBS sqlite3 tsu.db .dump > full-backup.sql
+
+```
+
+Data only:
+```sh
+docker exec -it 3270BBS sqlite3 tsu.db '.dump --data-only' > data-only-backup.sql
 
 ```
