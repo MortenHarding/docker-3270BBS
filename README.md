@@ -47,7 +47,7 @@ This will output the sql statements to a file to save it as a backup.
 
 Full backup:
 ```sh
-docker exec -it 3270BBS sqlite3 tsu.db .dump > ./data/full-backup.sql
+docker exec -it 3270BBS sqlite3 ./data/tsu.db '.backup ./data/full-backup.dmp'
 
 ```
 
@@ -58,6 +58,6 @@ This will output the sql statements to a file to save it as a backup.
 Full restore:
 ```sh
 rm ./data/tsu.db* 
-docker exec -it 3270BBS sqlite3 ./data/tsu.db '.read ./data/full-backup.sql'
-
+cp data/full-backup.dmp data/tsu.db
 ```
+
