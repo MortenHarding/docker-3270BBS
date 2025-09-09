@@ -6,11 +6,11 @@ All credit for the [3270 BBS](https://github.com/moshix/3270BBS) goes to [moshix
 You can easily install 3270 BBS without this docker container, by following the instructions on [3270 BBS](https://github.com/moshix/3270BBS).
 
 So why this docker container ?
-The benefits is what you get with any app that is containerized, such as easy deployment
+The benefits is what you get with any app that is containerized, such as easy deployment.
 
 # Start the 3270BBS docker container
 
-Note that the database file tsu.db, and the tsu.cnf file, will be created in a subfolder ./data and will not be deleted if you stop and delete the container. 
+Note that the database file tsu.db, tsu.greet and the tsu.cnf file, will be created in a subfolder ./data and will not be deleted if you stop and delete the container. 
 This will ensure that any changes made to the tsu.cnf file or the tsu.db, will be used at next startup.
 
 ```sh
