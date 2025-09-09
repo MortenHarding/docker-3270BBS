@@ -19,7 +19,7 @@ COPY --from=build /usr/local/bin/c3270 /usr/local/bin
 ENV OSTYPE=linux
 
 RUN git clone https://github.com/moshix/3270BBS.git /opt/3270bbs \
-&& wget  -O /opt/3270bbs/tsu https://github.com/moshix/3270BBS/releases/download/28.2/3270BBS-linux-amd64 \
+&& wget  -O /opt/3270bbs/tsu https://github.com/moshix/3270BBS/releases/download/28.3/3270BBS-linux-amd64 \
 && chmod +x /opt/3270bbs/tsu \
 && ln -s /opt/3270bbs/tsu /opt/3270bbs/3270BBS \
 && sed -i 's/bash/sh/' /opt/3270bbs/start_bbs.bash \
@@ -27,7 +27,7 @@ RUN git clone https://github.com/moshix/3270BBS.git /opt/3270bbs \
 && mkdir -p /opt/3270bbs/data
 
 WORKDIR /opt/3270bbs
-COPY tsu.config startup.sh ./
+COPY tsu.config startup.sh national_holidays.json ./
 RUN chmod +x startup.sh
 
 ENTRYPOINT ["./startup.sh"]
