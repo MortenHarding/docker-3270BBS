@@ -9,7 +9,7 @@
   - [Connect to the SQLite tsu.db](#connect-to-tsudb-in-the-running-container)
   - [Backup the SQLite tsu.db](#backup-the-sqlite-tsudb)
   - [Restore the SQLite tsu.db](#restore-the-sqlite-tsudb)
-- [Build the container](#build-the-container-using-the-dockerfile-in-this-repo)
+- [Build the container](#build-the-container)
 
 # This Repo
 
@@ -81,7 +81,9 @@ rm ./data/tsu.db*
 cp data/full-backup.dmp data/tsu.db
 ```
 
-# Build the container using the dockerfile in this repo
+# Build the container
+
+Build a container, using the dockerfile from this repo, with the latest release of TSU from https://github.com/moshix/3270BBS/releases
 
 ```sh
 docker build -t My-3270bbs .
