@@ -63,8 +63,6 @@ docker exec -it 3270BBS sqlite3 tsu.db
 
 ## Backup the sqlite tsu.db
 
-This will output the sql statements to a file to save it as a backup.
-
 Full backup:
 ```sh
 docker exec -it 3270BBS sqlite3 ./data/tsu.db '.backup ./data/full-backup.dmp'
@@ -73,13 +71,16 @@ docker exec -it 3270BBS sqlite3 ./data/tsu.db '.backup ./data/full-backup.dmp'
 
 ## Restore the sqlite tsu.db
 
-This will output the sql statements to a file to save it as a backup.
-
 Full restore:
+Stop the docker container, first and then remove the tsu.db
+
 ```sh
+docker container stop 3270BBS
 rm ./data/tsu.db* 
 cp data/full-backup.dmp data/tsu.db
 ```
+
+Start the docker container again as described in [Start the 3270 BBS docker container](#start-the-3270-bbs-docker-container)
 
 # Build the container
 
