@@ -18,7 +18,7 @@ COPY --from=build /usr/local/bin/c3270 /usr/local/bin
 
 ENV OSTYPE=linux
 
-RUN git clone https://github.com/moshix/3270BBS.git /opt/3270bbs \
+RUN git clone --depth=1 https://github.com/moshix/3270BBS.git /opt/3270bbs \
 && wget  -O /opt/3270bbs/tsu https://github.com/moshix/3270BBS/releases/latest/download/3270BBS-linux-amd64 \
 && chmod +x /opt/3270bbs/tsu \
 && ln -s /opt/3270bbs/tsu /opt/3270bbs/3270BBS \
