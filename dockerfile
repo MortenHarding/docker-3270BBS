@@ -12,12 +12,22 @@ RUN ./configure --enable-c3270 \
 && make install
 
 FROM alpine:latest AS base
-RUN apk add ncurses-dev sqlite git sudo tzdata
+RUN apk add ncurses-dev sqlite git sudo tzdata py3-tornado py3-terminado openssl
 
 COPY --from=build /usr/local/bin/c3270 /usr/local/bin
-
 ENV OSTYPE=linux
 
+#Install web3270
+RUN git clone --depth=1 https://github.com/MVS-sysgen/web3270.git /opt/web3270 \
+&& rm /opt/web3270/web3270.ini \
+&& openssl req -x509 -nodes -days 365 \
+    -subj  "/C=CA/ST=QC/O=web3270 Inc/CN=3270.web" \
+    -newkey rsa:2048 -keyout /opt/web3270/ca.key \
+    -out /opt/web3270/ca.csr
+
+COPY web3270.config run.sh /opt/web3270/
+
+#Install 3270 BBS
 RUN git clone --depth=1 https://github.com/moshix/3270BBS.git /opt/3270bbs \
 && wget  -O /opt/3270bbs/tsu https://github.com/moshix/3270BBS/releases/latest/download/3270BBS-linux-amd64 \
 && chmod +x /opt/3270bbs/tsu \
@@ -28,6 +38,7 @@ RUN git clone --depth=1 https://github.com/moshix/3270BBS.git /opt/3270bbs \
 
 WORKDIR /opt/3270bbs
 COPY tsu.config startup.sh ./
-RUN chmod +x startup.sh
+RUN chmod +x startup.sh \
+&& chmod +x /opt/web3270/run.sh
 
 ENTRYPOINT ["./startup.sh"]

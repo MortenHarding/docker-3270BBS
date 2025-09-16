@@ -39,7 +39,7 @@ Please change:
 * -p to match the ports you require
 
 ```sh
-docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 mhardingdk/3270bbs:latest
+docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 mhardingdk/3270bbs:latest
 ```
 
 Note: The files tsu.db, tsu.greet and the tsu.cnf file, will be created in a subfolder ./data, 3270bbs.log in a subfolder ./log, and will not be deleted if you stop and delete the container. 
@@ -52,6 +52,8 @@ Connect to the 3270 BBS using your prefered 3270 terminal emulator, or use the c
 ```sh
 docker exec -it 3270BBS c3270 localhost:3270
 ```
+
+The container also has web3270 setup and running on http://localhost:4443
 
 # SQLite tips for the container
 

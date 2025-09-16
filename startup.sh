@@ -38,4 +38,21 @@ if [ ! -f "./data/tsu.greet" ]; then
     rm tsu.greet
     ln -s ./data/tsu.greet tsu.greet
 fi
+
+#Create web3270.ini if it doesn't exist
+if [ ! -f "./data/web3270.ini" ]; then
+    echo "*** Creating ./data/web3270.ini ***"
+    cp /opt/web3270/web3270.config ./data/web3270.ini
+fi
+
+#Create web3270.ini link if it doesn't exist
+if [ ! -f "/opt/web3270/web3270.ini" ]; then
+    echo "*** Creating /opt/web3270/web3270.ini link ***"
+    ln -s ./data/web3270.ini /opt/web3270/web3270.ini
+fi
+
+echo "*** Starting web3270 ***"
+/opt/web3270/run.sh
+
+echo "*** Starting 3270 BBS ***"
 ./start_bbs.bash
