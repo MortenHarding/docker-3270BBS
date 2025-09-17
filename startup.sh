@@ -51,6 +51,18 @@ if [ ! -f "/opt/web3270/web3270.ini" ]; then
     ln -s ./data/web3270.ini /opt/web3270/web3270.ini
 fi
 
+#Move existing 3270bbs.log to 3270bbs
+if [ -e "/var/log/3270bbs.log" ]; then
+    echo "*** Moving 3270bbs.log to 3270bbs_"$(date +%F-%T)".log ***"
+    mv /var/log/3270bbs.log /var/log/3270bbs_$(date +%F-%T).log
+fi
+
+#Move existing web3270.log to web3270
+if [ -e "/var/log/web3270.log" ]; then
+    echo "*** Moving web3270.log to web3270_"$(date +%F-%T)".log ***"
+    mv /var/log/web3270.log /var/log/web3270_$(date +%F-%T).log
+fi
+
 echo "*** Starting web3270 ***"
 /opt/web3270/run.sh
 
