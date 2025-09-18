@@ -54,6 +54,8 @@ The files and their location:
 ./data/tsu.greet
 ./data/tsu.cnf
 ./data/tsu.logo
+./data/certificate.crt
+./data/private.key
 ./data/web3270.ini
 ./log/3270bbs.log
 ./log/web3270.log
