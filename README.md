@@ -31,19 +31,35 @@ Install docker to use the container in this repository.
 
 ## Start the 3270 BBS docker container
 
-Start the 3270 BBS container using the following command. 
+Start the 3270 BBS container using the following command.
+
 Please change:
 
-* hostname.domain.net to the hostname you want the 3270 BBS to run as
-* TZ=Europe/Copenhagen to your timezone
-* -p to match the ports you require
+The hostname you want the 3270 BBS to run as
+* hostname.domain.net 
+
+The timezone
+* TZ=Europe/Copenhagen
+
 
 ```sh
 docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 mhardingdk/3270bbs:latest
 ```
 
-Note: The files tsu.db, tsu.greet and the tsu.cnf file, will be created in a subfolder ./data, 3270bbs.log in a subfolder ./log, and will not be deleted if you stop and delete the container. 
-This will ensure that any changes made to the tsu.cnf, tsu.greet or the tsu.db, will be used at next startup.
+Several configuration and logfiles are accessible through the volumes mounted to the docker container. The volumes are mounted as subdirectories in the folder were you execute "docker run".
+
+The files and their location:
+```sh
+./data/tsu.db
+./data/tsu.greet
+./data/tsu.cnf
+./data/tsu.logo
+./data/web3270.ini
+./log/3270bbs.log
+./log/web3270.log
+```
+
+This will ensure that any changes made to the tsu.cnf, tsu.greet, tsu.log, web3270.ini or the tsu.db will be used at next startup.
 
 ## Connect to 3270 BBS
 

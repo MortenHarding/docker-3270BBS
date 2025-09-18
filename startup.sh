@@ -39,6 +39,18 @@ if [ ! -f "./data/tsu.greet" ]; then
     ln -s ./data/tsu.greet tsu.greet
 fi
 
+#Move tsu.logo to ./data and create link
+if [ ! -f "./data/tsu.logo" ]; then
+    echo "*** Creating ./data/tsu.logo ***"
+    mv tsu.logo ./data
+    echo "*** Creating tsu.logo link ***"
+    ln -s ./data/tsu.logo tsu.logo
+    else
+    echo "*** Creating tsu.logo link ***"
+    rm tsu.logo
+    ln -s ./data/tsu.logo tsu.logo
+fi
+
 #Create web3270.ini if it doesn't exist
 if [ ! -f "./data/web3270.ini" ]; then
     echo "*** Creating ./data/web3270.ini ***"
