@@ -104,7 +104,7 @@ Start the docker container again as described in [Start the 3270 BBS docker cont
 
 # Build the container
 
-Build a container, using the dockerfile from this repo, with the latest release of TSU from https://github.com/moshix/3270BBS/releases
+Build a container, using the dockerfile from this repo, with the latest release of 3270BBS from https://github.com/moshix/3270BBS/releases
 
 ```sh
 docker build -t My-3270bbs .
