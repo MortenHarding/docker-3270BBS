@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
+ARGS="$1"
+PLATFORM="${ARGS:=linux-amd64}"
+#Get latest version of 3270BBS executable
+./getTSU.sh $PLATFORM
 
 #Create tsu.db if it doesn't exist in ./data
 if [ ! -f "./data/tsu.db" ]; then
