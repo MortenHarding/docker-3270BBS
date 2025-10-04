@@ -25,12 +25,11 @@ RUN git clone --depth=1 https://github.com/moshix/3270BBS.git /opt/3270bbs \
 
 #Install web3270
 RUN git clone --depth=1 https://github.com/MVS-sysgen/web3270.git /opt/web3270 \
-&& rm /opt/web3270/web3270.ini 
-#\
-#&& openssl req -x509 -nodes -days 365 \
-#    -subj  "/C=CA/ST=QC/O=web3270 Inc/CN=3270.web" \
-#    -newkey rsa:2048 -keyout /opt/3270bbs/cert/ca.key \
-#    -out /opt/3270bbs/cert/ca.csr
+&& rm /opt/web3270/web3270.ini \
+&& openssl req -x509 -nodes -days 365 \
+    -subj  "/C=CA/ST=QC/O=web3270 Inc/CN=3270.web" \
+    -newkey rsa:2048 -keyout /opt/3270bbs/cert/ca.key \
+    -out /opt/3270bbs/cert/ca.csr
 
 COPY web3270.config run.sh /opt/web3270/
 
