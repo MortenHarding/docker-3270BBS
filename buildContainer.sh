@@ -43,5 +43,5 @@ if [[ "$choice" =~ ^[Yy]$ ]]; then
 fi
 
 # Test that the new image can be loaded from hup.docker.com. Only needed when refreshing the container image in mhardingdk/3270bbs:latest
-echo "docker run -it --rm --name $DOCKER_CONTAINERNAME -h $DOCKER_HOSTNAME -v $DOCKER_DATA_VOL -v $DOCKER_CERT_VOL -v $DOCKER_LOG_VOL -p $DOCKER_PORT $DOCKER_REPO:$DOCKER_IMAGE_TAG"
-docker run -it --rm --name "$DOCKER_CONTAINERNAME" -h "$DOCKER_HOSTNAME" -v "$DOCKER_DATA_VOL" -v "$DOCKER_CERT_VOL" -v "$DOCKER_LOG_VOL"  -p "$DOCKER_PORT" "$DOCKER_REPO":"$DOCKER_IMAGE_TAG"
+echo "docker run -it --rm --name $DOCKER_CONTAINERNAME -h $DOCKER_HOSTNAME -v $DOCKER_DATA_VOL -v $DOCKER_CERT_VOL -v $DOCKER_LOG_VOL -p $DOCKER_3270_PORT -p $DOCKER_WEB3270_PORT -p $DOCKER_HTTPD_PORT $DOCKER_REPO:$DOCKER_IMAGE_TAG"
+docker run -it --rm --name "$DOCKER_CONTAINERNAME" -h "$DOCKER_HOSTNAME" -v "$DOCKER_DATA_VOL" -v "$DOCKER_CERT_VOL" -v "$DOCKER_LOG_VOL"  -p "$DOCKER_3270_PORT" -p "$DOCKER_WEB3270_PORT" -p "$DOCKER_HTTPD_PORT" "$DOCKER_REPO":"$DOCKER_IMAGE_TAG"
