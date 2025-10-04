@@ -69,6 +69,8 @@ The files and their location:
 
 ./log/3270bbs.log
 ./log/web3270.log
+
+./cert/
 ```
 
 This will ensure that any changes made to the tsu.cnf, tsu.greet, tsu.log, web3270.ini or the tsu.db will be used at next startup.

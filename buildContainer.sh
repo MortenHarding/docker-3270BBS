@@ -9,7 +9,9 @@ export DOCKER_IMAGE_TAG="latest"
 export DOCKER_DATA_VOL="./data:/opt/3270bbs/data"
 export DOCKER_CERT_VOL="./cert:/opt/3270bbs/cert"
 export DOCKER_LOG_VOL="./log:/var/log"
-export DOCKER_PORT="3270:3270"
+export DOCKER_3270_PORT="3270:3270"
+export DOCKER_HTTPD_PORT="9000:9000"
+export DOCKER_WEB3270_PORT="4443:443"
 
 # Remove all existing docker images and build cache
 # Please make sure you understand what this does before running this line.
@@ -23,8 +25,8 @@ echo "docker build -t $DOCKER_REPO:$DOCKER_IMAGE_TAG ."
 docker build -t "$DOCKER_REPO":"$DOCKER_IMAGE_TAG" .
 
 # Start a container on the new image to verify it's working
-echo "docker run -it --rm --name $DOCKER_CONTAINERNAME -h $DOCKER_HOSTNAME -v $DOCKER_DATA_VOL -v $DOCKER_CERT_VOL -v $DOCKER_LOG_VOL -p $DOCKER_PORT $DOCKER_REPO:$DOCKER_IMAGE_TAG"
-docker run -it --rm --name "$DOCKER_CONTAINERNAME" -h "$DOCKER_HOSTNAME" -v "$DOCKER_DATA_VOL" -v "$DOCKER_CERT_VOL" -v "$DOCKER_LOG_VOL"  -p "$DOCKER_PORT" "$DOCKER_REPO":"$DOCKER_IMAGE_TAG"
+echo "docker run -it --rm --name $DOCKER_CONTAINERNAME -h $DOCKER_HOSTNAME -v $DOCKER_DATA_VOL -v $DOCKER_CERT_VOL -v $DOCKER_LOG_VOL -p $DOCKER_3270_PORT -p $DOCKER_WEB3270_PORT -p $DOCKER_HTTPD_PORT $DOCKER_REPO:$DOCKER_IMAGE_TAG"
+docker run -it --rm --name "$DOCKER_CONTAINERNAME" -h "$DOCKER_HOSTNAME" -v "$DOCKER_DATA_VOL" -v "$DOCKER_CERT_VOL" -v "$DOCKER_LOG_VOL"  -p "$DOCKER_3270_PORT" -p "$DOCKER_WEB3270_PORT" -p "$DOCKER_HTTPD_PORT" "$DOCKER_REPO":"$DOCKER_IMAGE_TAG"
 echo
 
 # Push new docker image to hub.docker.com. Change to your own repo in Docker hub, before running this line.
