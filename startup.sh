@@ -82,5 +82,5 @@ fi
 echo "*** Starting web3270 ***"
 /opt/web3270/run.sh
 
-echo "*** Starting 3270 BBS ***"
+#*** Starting 3270 BBS ***
 ./start_bbs.bash

@@ -25,7 +25,9 @@ RUN git clone --depth=1 https://github.com/moshix/3270BBS.git /opt/3270bbs \
 
 #Install web3270
 RUN git clone --depth=1 https://github.com/MVS-sysgen/web3270.git /opt/web3270 \
-&& rm /opt/web3270/web3270.ini
+&& rm /opt/web3270/web3270.ini \
+&& sed -i 's#<div id="bysof">By: Soldier of FORTRAN</div>##' /opt/web3270/index.html \
+&& sed -i 's#<div id="bysof">By: Soldier of FORTRAN</div>##' /opt/web3270/login.html
 
 COPY web3270.config run.sh /opt/web3270/
 
