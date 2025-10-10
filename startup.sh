@@ -1,8 +1,12 @@
 #!/usr/bin/env sh
 ARGS="$1"
 PLATFORM="${ARGS:=linux-amd64}"
+
 #Get latest version of 3270BBS executable
 ./getTSU.sh $PLATFORM
+
+#Get latest executable of gopher3270
+./getGopher3270.sh
 
 #Create tsu.db if it doesn't exist in ./data
 if [ ! -f "./data/tsu.db" ]; then
@@ -81,6 +85,9 @@ fi
 
 echo "*** Starting web3270 ***"
 /opt/web3270/run.sh
+
+echo "*** Starting gopher3270 ***"
+nohup /opt/gopher3270/gopher3270 -host gopher.floodgap.com -port 70 -listen :7070 </dev/null >/dev/null 2>&1 &
 
 #*** Starting 3270 BBS ***
 ./start_bbs.bash
