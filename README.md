@@ -20,7 +20,8 @@ You can easily install 3270 BBS without this docker container, by following the 
 
 So why this docker container ?
 The benefits is 
-- It will download the latest release of 3270BBS, when the container is started. 
+- It will download the latest release of 3270BBS, when the container is started.
+- It contains a c3270 emulator, web3270 emulator, gopher3270 and the rss3270cli 
 - Plus what you get with any app that is containerized, such as easy deployment. 
 
 
@@ -116,8 +117,23 @@ Start the docker container again as described in [Start the 3270 BBS docker cont
 
 # Build the container
 
-Build a container, using the dockerfile from this repo, with the latest release of 3270BBS from https://github.com/moshix/3270BBS/releases
+Build a container, using the dockerfile from this repo
 
 ```sh
 docker build -t My-3270bbs .
 ```
+
+# References
+
+[3270BBS](https://github.com/moshix/3270BBS/releases)
+
+[go3270](https://github.com/racingmars/go3270)
+
+[c3270](https://x3270.miraheze.org/wiki/C3270)
+
+[web3270](https://github.com/MVS-sysgen/web3270)
+
+[gopher3270](https://github.com/ErnieTech101/gopher3270)
+
+[rss3270cli](https://github.com/MortenHarding/rss3270cli)
+

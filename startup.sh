@@ -8,6 +8,9 @@ PLATFORM="${ARGS:=linux-amd64}"
 #Get latest executable of gopher3270
 ./getGopher3270.sh
 
+#Get latest version of rss3270cli executable
+./getrss3270cli.sh $PLATFORM
+
 #Create tsu.db if it doesn't exist in ./data
 if [ ! -f "./data/tsu.db" ]; then
     echo "*** Creating ./data/tsu.db ***"
@@ -89,5 +92,10 @@ echo "*** Starting web3270 ***"
 echo "*** Starting gopher3270 ***"
 nohup /opt/gopher3270/gopher3270 -host gopher.floodgap.com -port 70 -listen :7070 </dev/null >/dev/null 2>&1 &
 
+echo "*** Starting rss3270cli ***"
+cd /opt/rss3270cli
+nohup /opt/rss3270cli/rss3270cli </dev/null >/dev/null 2>&1 &
+
 #*** Starting 3270 BBS ***
+cd /opt/3270bbs
 ./start_bbs.bash
