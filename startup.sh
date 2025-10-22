@@ -86,6 +86,12 @@ if [ -e "/var/log/web3270.log" ]; then
     mv /var/log/web3270.log /var/log/web3270_$(date +%F-%T).log
 fi
 
+#Move existing rss3270cli.log to rss3270
+if [ -e "/var/log/rss3270cli.log" ]; then
+    echo "*** Moving rss3270cli.log to rss3270cli_"$(date +%F-%T)".log ***"
+    mv /var/log/rss3270cli.log /var/log/rss3270cli_$(date +%F-%T).log
+fi
+
 echo "*** Starting web3270 ***"
 /opt/web3270/run.sh
 
@@ -94,7 +100,7 @@ nohup /opt/gopher3270/gopher3270 -host gopher.floodgap.com -port 70 -listen :707
 
 echo "*** Starting rss3270cli ***"
 cd /opt/rss3270cli
-nohup /opt/rss3270cli/rss3270cli </dev/null >/dev/null 2>&1 &
+nohup /opt/rss3270cli/rss3270cli > /var/log/rss3270cli.log 2>&1 &
 
 #*** Starting 3270 BBS ***
 cd /opt/3270bbs
