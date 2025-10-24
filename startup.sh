@@ -62,6 +62,18 @@ if [ ! -f "./data/tsu.logo" ]; then
     ln -s ./data/tsu.logo tsu.logo
 fi
 
+#Move rssfeed.url to ./data and create link
+if [ ! -f "./data/rssfeed.url" ]; then
+    echo "*** Creating ./data/rssfeed.url ***"
+    mv /opt/rss3270cli/rssfeed.url ./data
+    echo "*** Creating rssfeed.url link ***"
+    ln -s /opt/3270bbs/data/rssfeed.url /opt/rss3270cli/rssfeed.url
+    else
+    echo "*** Creating rssfeed.url link ***"
+    rm /opt/rss3270cli/rssfeed.url
+    ln -s /opt/3270bbs/data/rssfeed.url /opt/rss3270cli/rssfeed.url
+fi
+
 #Create web3270.ini if it doesn't exist
 if [ ! -f "./data/web3270.ini" ]; then
     echo "*** Creating ./data/web3270.ini ***"

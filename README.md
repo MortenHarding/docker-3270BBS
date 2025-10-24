@@ -19,10 +19,17 @@ All credit for the [3270 BBS](https://github.com/moshix/3270BBS) goes to [moshix
 You can easily install 3270 BBS without this docker container, by following the instructions on [3270 BBS](https://github.com/moshix/3270BBS).
 
 So why this docker container ?
-The benefits is 
+
+The benefits are:
+
 - It will download the latest release of 3270BBS, when the container is started.
-- It contains a c3270 emulator, web3270 emulator, gopher3270 and the rss3270cli 
-- Plus what you get with any app that is containerized, such as easy deployment. 
+- Additionally it contains 
+    - c3270 emulator
+    - web3270 emulator
+    - gopher3270 
+    - rss3270cli 
+
+Plus what you get with any app that is containerized, such as easy deployment. 
 
 
 # Guick start guide
@@ -67,9 +74,11 @@ The files and their location:
 ./data/tsu.cnf
 ./data/tsu.logo
 ./data/web3270.ini
+./data/rssfeed.url
 
 ./log/3270bbs.log
 ./log/web3270.log
+./log/rss3270cli.log
 
 ./cert/
 ```
