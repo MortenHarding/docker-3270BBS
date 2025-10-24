@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>web3270</title>
+    <style>
+      @font-face {
+        font-family: '3270Regular';
+        src: url('3270-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      html {
+        font-family: '3270Regular';
+        color:aliceblue;
+      }
+      body {background-color:#23272a;}
+      #terminal{
+        margin: fixed;
+        width : 5%;
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/xterm@4.15.0/css/xterm.css"
+    />
+  </head>
+  <body>
+    <div style="margin-left: 10px;">
+    <span style="font-family: 3270Regular;font-size: 1.4em">web3270</span>&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
+      <span style="margin-left: 590px; font-size: small">status:
+          <span style="font-size: small" id="status">connecting...</span>
+      </span>
+    </div>
+
+    <div style="width: {{width}}ch; height: {{height}}ch" id="terminal"></div>
+    <script src="https://unpkg.com/xterm@4.15.0/lib/xterm.js"></script>
+    <script src="https://unpkg.com/fontfaceobserver@2.1.0/fontfaceobserver.standalone.js"></script>   
+
+    <script>
+
+    var height = {{height}}
+    var width = {{width}}
+    var protocol = (window.location.protocol.indexOf("https") === 0) ? "wss" : "ws";
+    var ws_url = protocol+"://"+window.location.host+ "/websocket";        
+    //console.log(ws_url);
+    
+
+    var ws = new WebSocket(ws_url);
+    //var regular = new FontFaceObserver('3270Regular').load();
+
+    //Promise.all([regular]).then(() => {  
+      //console.log(regular)
+      var term = new Terminal({
+        cols: 80,
+        rows: 27,
+        bellStyle: 'sound',
+        fontSize: 17
+      //  fontFamily: "3270Regular"
+      });
+      //term.setOption('logLevel', 'debug');
+
+      ws.onopen = function(event) {
+      //ws.send(JSON.stringify(["set_size", 45, 80]))
+
+        document.getElementById("status").innerHTML = 
+        '<span style="color: #23272a; background-color: lightgreen;">connected</span>';
+
+        term.onData(data => {
+          ws.send(JSON.stringify(["stdin", data]));
+        });
+
+        term.onTitleChange(title => {
+          console.log(title);
+        });
+        
+        term.open(document.getElementById("terminal"));
+        term.focus();
+        ws.onmessage = function(event) {
+            json_msg = JSON.parse(event.data);
+            switch(json_msg[0]) {
+                case "stdout":
+                    term.write(json_msg[1]);
+                    break;
+                case "disconnect":
+                    term.write("\r\n\r\n3270 Connection Lost\r\n");
+                    document.getElementById("status").innerHTML = 
+                    '<span style="background-color: #ff8383;">disconnected</span>';
+                    break;
+              }
+          };
+      };
+    //}); // End of Promise
+    </script>
+  </body>
+</html>
