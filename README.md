@@ -4,6 +4,7 @@
 - [Quick start guide](#Quick-start-guide)
   - [Prerequisites](#Prerequisites) 
   - [Start the 3270 BBS docker container](#start-the-3270-bbs-docker-container)
+  - [Update 3270 BBS](#update-3270-bbs)
   - [Connect to 3270 BBS in the container](#connect-to-3270-bbs)
 - [SQLite tips](#sqlite-tips-for-the-container)
   - [Connect to the SQLite tsu.db](#connect-to-tsudb-in-the-running-container)
@@ -84,6 +85,15 @@ The files and their location:
 ```
 
 This will ensure that any changes made to the tsu.cnf, tsu.greet, tsu.log, web3270.ini or the tsu.db will be used at next startup.
+
+## Update 3270 BBS
+
+To update 3270 BBS with the latest release from [3270BBS](https://github.com/moshix/3270BBS/releases), you just have to restart the docker container
+
+```sh
+docker container stop 3270BBS
+docker container start 3270BBS
+```
 
 ## Connect to 3270 BBS
 
