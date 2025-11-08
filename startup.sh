@@ -62,6 +62,18 @@ if [ ! -f "./data/tsu.logo" ]; then
     ln -s ./data/tsu.logo tsu.logo
 fi
 
+#Move tsu.logon.message to ./data and create link
+if [ ! -f "./data/tsu.logon.message" ]; then
+    echo "*** Creating ./data/tsu.logon.message ***"
+    mv tsu.logon.message ./data
+    echo "*** Creating tsu.logon.message link ***"
+    ln -s ./data/tsu.logon.message tsu.logon.message
+    else
+    echo "*** Creating tsu.logo link ***"
+    rm tsu.logon.message
+    ln -s ./data/tsu.logon.message tsu.logon.message
+fi
+
 #Move rssfeed.url to ./data and create link
 if [ ! -f "./data/rssfeed.url" ]; then
     echo "*** Creating ./data/rssfeed.url ***"

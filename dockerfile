@@ -31,7 +31,7 @@ RUN git clone --depth=1 https://github.com/MVS-sysgen/web3270.git /opt/web3270 \
 COPY web3270.config run.sh index.html /opt/web3270/
 
 WORKDIR /opt/3270bbs
-COPY tsu.config startup.sh getTSU.sh getGopher3270.sh getrss3270cli.sh ./
+COPY tsu.config tsu.logon.message startup.sh getTSU.sh getGopher3270.sh getrss3270cli.sh ./
 RUN chmod +x startup.sh \
 && chmod +x getTSU.sh \
 && chmod +x getGopher3270.sh \
