@@ -55,7 +55,7 @@ The timezone
 
 
 ```sh
-docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./cert:/opt/3270bbs/cert -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 -p 7300:7300 mhardingdk/3270bbs:latest
+docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./cert:/opt/3270bbs/cert -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 -p 7300:7300 -p 1079:1079 mhardingdk/3270bbs:latest
 ```
 
 Note: By default the above docker run command, will download the latest release of ``` 3270BBS-x.x.x.x-linux-amd64 ```. If you need any of the other platform releases, simply append the platform to the docker run command. 
@@ -63,7 +63,7 @@ Note: By default the above docker run command, will download the latest release 
 For example if you require darwin-arm64, append the string ```darwin-arm64``` to the end of the docker run command.
 
 ```sh
-docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./cert:/opt/3270bbs/cert -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 -p 7300:7300 mhardingdk/3270bbs:latest darwin-arm64
+docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./cert:/opt/3270bbs/cert -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 -p 7300:7300 -p 1079:1079 mhardingdk/3270bbs:latest darwin-arm64
 ```
 
 Several configuration and logfiles are accessible through the volumes mounted to the docker container. The volumes are mounted as subdirectories in the folder were you execute "docker run".
