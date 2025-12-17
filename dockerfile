@@ -1,5 +1,5 @@
 # Using Alpine as a base
-FROM alpine:latest AS build
+FROM alpine:3.22.2 AS build
 RUN apk --update add gcc make g++ zlib-dev python3 ncurses-dev git
 
 WORKDIR /home
