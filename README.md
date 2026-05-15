@@ -25,10 +25,7 @@ The benefits are:
 
 - It will download the latest release of 3270BBS, when the container is started.
 - Additionally it contains 
-    - c3270 emulator
     - web3270 emulator
-    - gopher3270 
-    - rss3270cli 
 
 Plus what you get with any app that is containerized, such as easy deployment. 
 
@@ -63,10 +60,10 @@ Note: By default the above docker run command, will download the latest release 
 For example if you require darwin-arm64, append the string ```darwin-arm64``` to the end of the docker run command.
 
 ```sh
-docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./cert:/opt/3270bbs/cert -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 4443:443 -p 7300:7300 -p 79:1079 mhardingdk/3270bbs:latest darwin-arm64
+docker run -dit --rm --name 3270BBS -h hostname.domain.net -e TZ=Europe/Copenhagen -v ./data:/opt/3270bbs/data -v ./cert:/opt/3270bbs/cert -v ./log:/var/log -p 2022:2022 -p 9000:9000 -p 3270:3270 -p 3271:3271 -p 8080:8080 -p 79:1079 mhardingdk/3270bbs:latest darwin-arm64
 ```
 
-Several configuration and logfiles are accessible through the volumes mounted to the docker container. The volumes are mounted as subdirectories in the folder were you execute "docker run".
+Configuration and logfiles are accessible through the volumes mounted to the docker container. The volumes are mounted as subdirectories in the folder were you execute "docker run".
 
 The files and their location:
 ```sh
@@ -74,17 +71,13 @@ The files and their location:
 ./data/tsu.greet
 ./data/tsu.cnf
 ./data/tsu.logo
-./data/web3270.ini
-./data/rssfeed.url
 
 ./log/3270bbs.log
-./log/web3270.log
-./log/rss3270cli.log
 
 ./cert/
 ```
 
-This will ensure that any changes made to the tsu.cnf, tsu.greet, tsu.log, web3270.ini or the tsu.db will be used at next startup.
+This will ensure that any changes made to the tsu.cnf, tsu.greet, tsu.log or the tsu.db will be used at next startup.
 
 ## Update 3270 BBS
 
@@ -97,13 +90,7 @@ docker container start 3270BBS
 
 ## Connect to 3270 BBS
 
-Connect to the 3270 BBS using your prefered 3270 terminal emulator, or use the c3270 emulator in the container.
-
-```sh
-docker exec -it 3270BBS c3270 localhost:3270
-```
-
-The container also has web3270 setup and running on http://localhost:4443
+The container has web3270 setup and running on http://localhost:8080
 
 # SQLite tips for the container
 
@@ -145,14 +132,3 @@ docker build -t My-3270bbs .
 # References
 
 [3270BBS](https://github.com/moshix/3270BBS/releases)
-
-[go3270](https://github.com/racingmars/go3270)
-
-[c3270](https://x3270.miraheze.org/wiki/C3270)
-
-[web3270](https://github.com/MVS-sysgen/web3270)
-
-[gopher3270](https://github.com/ErnieTech101/gopher3270)
-
-[rss3270cli](https://github.com/MortenHarding/rss3270cli)
-

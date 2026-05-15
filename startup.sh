@@ -5,17 +5,10 @@ PLATFORM="${ARGS:=linux-amd64}"
 #Get latest version of 3270BBS executable
 ./getTSU.sh $PLATFORM
 
-#Get latest executable of gopher3270
-./getGopher3270.sh
-
-#Get latest version of rss3270cli executable
-./getrss3270cli.sh $PLATFORM
-
 #Create tsu.db if it doesn't exist in ./data
 if [ ! -f "./data/tsu.db" ]; then
     echo "*** Creating ./data/tsu.db ***"
-    ./create_tsudb.bash tsu.db
-    mv tsu.db* ./data
+    mv tsu.db.bak ./data/tsu.db
 fi
 
 #Create tsu.db links if they do not exist
@@ -74,57 +67,14 @@ if [ ! -f "./data/tsu.logon.message" ]; then
     ln -s ./data/tsu.logon.message tsu.logon.message
 fi
 
-#Move rssfeed.url to ./data and create link
-if [ ! -f "./data/rssfeed.url" ]; then
-    echo "*** Creating ./data/rssfeed.url ***"
-    mv /opt/rss3270cli/rssfeed.url ./data
-    echo "*** Creating rssfeed.url link ***"
-    ln -s /opt/3270bbs/data/rssfeed.url /opt/rss3270cli/rssfeed.url
-    else
-    echo "*** Creating rssfeed.url link ***"
-    rm /opt/rss3270cli/rssfeed.url
-    ln -s /opt/3270bbs/data/rssfeed.url /opt/rss3270cli/rssfeed.url
-fi
-
-#Create web3270.ini if it doesn't exist
-if [ ! -f "./data/web3270.ini" ]; then
-    echo "*** Creating ./data/web3270.ini ***"
-    cp /opt/web3270/web3270.config ./data/web3270.ini
-fi
-
-#Create web3270.ini link if it doesn't exist
-if [ ! -f "/opt/web3270/web3270.ini" ]; then
-    echo "*** Creating /opt/web3270/web3270.ini link ***"
-    ln -s ./data/web3270.ini /opt/web3270/web3270.ini
-fi
-
 #Move existing 3270bbs.log to 3270bbs
 if [ -e "/var/log/3270bbs.log" ]; then
     echo "*** Moving 3270bbs.log to 3270bbs_"$(date +%F-%T)".log ***"
     mv /var/log/3270bbs.log /var/log/3270bbs_$(date +%F-%T).log
 fi
 
-#Move existing web3270.log to web3270
-if [ -e "/var/log/web3270.log" ]; then
-    echo "*** Moving web3270.log to web3270_"$(date +%F-%T)".log ***"
-    mv /var/log/web3270.log /var/log/web3270_$(date +%F-%T).log
-fi
-
-#Move existing rss3270cli.log to rss3270
-if [ -e "/var/log/rss3270cli.log" ]; then
-    echo "*** Moving rss3270cli.log to rss3270cli_"$(date +%F-%T)".log ***"
-    mv /var/log/rss3270cli.log /var/log/rss3270cli_$(date +%F-%T).log
-fi
-
 echo "*** Starting web3270 ***"
-/opt/web3270/run.sh
-
-echo "*** Starting gopher3270 ***"
-nohup /opt/gopher3270/gopher3270 -host gopher.floodgap.com -port 70 -listen :7070 </dev/null >/dev/null 2>&1 &
-
-echo "*** Starting rss3270cli ***"
-cd /opt/rss3270cli
-nohup /opt/rss3270cli/rss3270cli > /var/log/rss3270cli.log 2>&1 &
+nohup ./web3270 > /var/log/web3270.log &
 
 #*** Starting 3270 BBS ***
 cd /opt/3270bbs
